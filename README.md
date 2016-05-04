@@ -25,8 +25,8 @@ Quickstart: Run the demo
     sudo apt-get install ansible -qy
 
     ### Run the rdnbr demo
-    git clone https://github.com/cumulusnetworks/cldemo-automation-ansible
-    cd cldemo-automation-ansible
+    git clone https://github.com/rdarbha/cldemo-roh-ansible
+    cd cldemo-roh-ansible
     ansible-playbook run-demo.yml
 
     ### check reachability of server04 from server01
