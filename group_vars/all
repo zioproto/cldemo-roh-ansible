@@ -59,9 +59,7 @@ interfaces:
         asn: 65101
         neighbors:
             eth1:
-                postup: "ip route replace 10.0.0.0/8 nexthop via 10.0.0.11 dev eth1 onlink nexthop via 10.0.0.12 dev eth2 onlink || ip route add 10.0.0.0/8 nexthop via 10.0.0.11 dev eth1 onlink"
             eth2:
-                postup: "ip route replace 10.0.0.0/8 nexthop via 10.0.0.11 dev eth1 onlink nexthop via 10.0.0.12 dev eth2 onlink || ip route add 10.0.0.0/8 nexthop via 10.0.0.12 dev eth2 onlink"
     server02:
         loopback:
             ip: "172.16.1.102"
@@ -69,9 +67,7 @@ interfaces:
         asn: 65102
         neighbors:
             eth1:
-                postup: "ip route add 10.0.0.0/8 nexthop via 10.0.0.11 dev eth1 onlink"
             eth2:
-                postup: "ip route add 10.0.0.0/8 nexthop via 10.0.0.12 dev eth2 onlink"
     server03:
         loopback:
             ip: "10.0.1.103"
@@ -79,9 +75,7 @@ interfaces:
         asn: 65103
         neighbors:
             eth1:
-                postup: "ip route add 10.0.0.0/8 nexthop via 10.0.0.13 dev eth1 onlink"
             eth2:
-                postup: "ip route add 10.0.0.0/8 nexthop via 10.0.0.14 dev eth2 onlink"
     server04:
         loopback:
             ip: "10.0.1.104"
@@ -89,6 +83,4 @@ interfaces:
         asn: 65104
         neighbors:
             eth1:
-                postup: "ip route add 10.0.0.0/8 nexthop via 10.0.0.13 dev eth1 onlink"
             eth2:
-                postup: "ip route add 10.0.0.0/8 nexthop via 10.0.0.14 dev eth2 onlink"

@@ -1,11 +1,13 @@
 {% set intvars = interfaces[ansible_hostname] -%}
 !
+{% if intvars.neighbors is defined %}
 {% for neighbor in intvars.neighbors %}
 interface {{ neighbor }}
  no ipv6 nd suppress-ra
  ipv6 nd ra-interval 3
 !
 {% endfor %}
+{% endif %}
 {% for neighbor in intvars.fabric %}
 interface {{ neighbor }}
  no ipv6 nd suppress-ra
@@ -33,8 +35,6 @@ router bgp {{ intvars.asn }}
     neighbor fabric timers 1 3
     neighbor fabric timers connect 3
     neighbor fabric remote-as external
-{#    neighbor fabric prefix-list dc-fabric-in in
-    neighbor fabric prefix-list dc-fabric-out out #}
 {% for neighbor in intvars.fabric %}
     neighbor {{ neighbor }} interface v6only
     neighbor {{ neighbor }} peer-group fabric

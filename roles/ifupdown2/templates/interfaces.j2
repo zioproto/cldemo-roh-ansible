@@ -13,7 +13,6 @@ iface eth0 inet dhcp
 {% for iface in intvars.neighbors %}
 auto {{ iface }}
 iface {{ iface }}
-    address {{ intvars.loopback }}/32
 
 {% endfor %}
 {% endif %}
