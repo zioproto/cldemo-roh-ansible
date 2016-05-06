@@ -19,6 +19,6 @@ iface {{ iface }} inet static
     address {{ intvars['loopback'].ip }}
     netmask {{ intvars['loopback'].mask }}
 {% if neighborvars[iface].postup is defined %}
-    postup {{neighborvars[iface].postup}}
+    {# postup {{neighborvars[iface].postup}} #}
 {% endif %}
 {% endfor %}

@@ -33,8 +33,11 @@ router bgp {{ intvars.asn }}
     neighbor {{ neighbor }} interface v6only
     neighbor {{ neighbor }} peer-group fabric
 {% endfor %}
+{% endfor %}
 {% if intvars.neighbors is defined %}
-    redistribute table 10
+    {% for neighbor in intvars.neighbors %}
+    neighbor {{ neighbor }} interface
+    neighbor {{ neighbor }} peer-group fabric
 {% endif %}
 !
 address-family ipv6 unicast
