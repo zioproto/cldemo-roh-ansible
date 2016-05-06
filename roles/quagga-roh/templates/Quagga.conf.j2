@@ -13,7 +13,6 @@ router bgp {{ intvars.asn }}
   maximum-paths 64
   bgp default show-hostname
   bgp bestpath as-path multipath-relax
-  bgp bestpath compare-routerid
   neighbor fabric peer-group
   neighbor fabric description Internal Fabric Network
   neighbor fabric capability extended-nexthop
@@ -25,4 +24,11 @@ router bgp {{ intvars.asn }}
   neighbor eth1 peer-group fabric
   neighbor eth2 interface
   neighbor eth2 peer-group fabric
-  
+  !
+  address-family ipv6
+    neighbor fabric activate
+    neighbor eth1 activate
+    neighbor eth1 peer-group fabric
+    neighbor eth2 activate
+    neighbor eth2 peer-group fabric
+!  

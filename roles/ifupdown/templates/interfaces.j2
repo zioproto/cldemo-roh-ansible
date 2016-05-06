@@ -10,15 +10,10 @@ iface lo inet loopback
 
 auto eth0
 iface eth0 inet dhcp
-    post-up ip route add default via 192.168.0.1
-
 
 {% for iface in neighborvars %}
 auto {{ iface }}
-iface {{ iface }} inet static
-    address {{ intvars['loopback'].ip }}
-    netmask {{ intvars['loopback'].mask }}
-{% if neighborvars[iface].postup is defined %}
-    {# postup {{neighborvars[iface].postup}} #}
+iface {{ iface }} inet manual
+
 {% endif %}
 {% endfor %}
