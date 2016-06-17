@@ -21,9 +21,9 @@
     - ifupdown
     - quagga-roh
 #    - ifplugd
- - hosts: server04
-   user: cumulus
-   become: yes
-   become_method: sudo
-   roles:
-     - apache
+- hosts: server04
+  user: cumulus
+  become: yes
+  become_method: sudo
+  roles:
+    - apache
