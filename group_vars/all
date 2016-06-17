@@ -62,7 +62,7 @@ interfaces:
             eth2:
     server02:
         loopback:
-            ip: "172.16.1.102"
+            ip: "10.0.1.102"
             mask: "255.255.255.255"
         asn: 65102
         neighbors:

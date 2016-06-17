@@ -5,7 +5,6 @@
   become_method: sudo
   roles:
     - ifupdown2
-    - rdnbr
     - quagga
 - hosts: spines
   user: cumulus
@@ -22,9 +21,9 @@
     - ifupdown
     - quagga-roh
 #    - ifplugd
-# - hosts: server04
-#   user: cumulus
-#   become: yes
-#   become_method: sudo
-#   roles:
-#     - apache
+ - hosts: server04
+   user: cumulus
+   become: yes
+   become_method: sudo
+   roles:
+     - apache
