@@ -16,7 +16,8 @@
   when: "'iproute' not in iproute_installed"
 
 - name: download official quagga deb
-  get_url: url=http://repo3.cumulusnetworks.com/repo/pool/cumulus/q/quagga/quagga_0.99.23.1-1+cl3u2_amd64.deb?raw=true dest=/tmp/quagga.deb validate_certs=False
+  #get_url: url=http://repo3.cumulusnetworks.com/repo/pool/cumulus/q/quagga/quagga_0.99.23.1-1+cl3u2_amd64.deb?raw=true dest=/tmp/quagga.deb validate_certs=False
+  get_url: url=https://github.com/CumulusNetworks/quagga/blob/cm_2.5/debian/release/quagga_0.99.23.1-1+cl2.5_amd64.deb?raw=true dest=/tmp/quagga.deb validate_certs=False
 
 - name: Install Quagga
   apt: deb=/tmp/quagga.deb
