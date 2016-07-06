@@ -1,35 +1,6 @@
 - name: Set APT to always use IPv4
   shell: "echo 'Acquire::ForceIPv4 \"true\";' > /etc/apt/apt.conf.d/99force-ipv4"
 
-# - name: Check if vlan is installed
-#   shell: "dpkg-query -f '${binary:Package}\n' -W"
-#   register: vlan_installed
-#   notify: install vlan package when not installed
-
-# #- name: print output for vlan check
-# #  debug: msg="{{vlan_installed}}"
-  
-# - name: install vlan package when not installed
-#   apt: name={{ item }} update_cache=yes state=present cache_valid_time=86400
-#   with_items:
-#     - vlan
-#   when: "'vlan' not in vlan_installed"
-
-
-# - name: Add 8021q module to running kernel config
-#   command: "{{ item }}"
-#   with_items:
-#     - modprobe 8021q
-
-# - name: Add 8021q module to persistent kernel startup
-#   lineinfile: dest=/etc/modules line={{ item }}
-#   with_items:
-#     - 8021q
-
-# - name: Enable IPv6 Routing on the FWs
-#   sysctl: name="net.ipv6.conf.all.forwarding" value=1 sysctl_set=yes state=present reload=yes
-#   ignore_errors: yes 
-
 - name: Enable Routing for IPv4
   sysctl: name="net.ipv4.ip_forward" value=1 sysctl_set=yes state=present reload=yes
   tags:
@@ -45,20 +16,10 @@
   when: "'iproute' not in iproute_installed"
 
 - name: download official quagga deb
-  get_url: url=https://github.com/CumulusNetworks/quagga/blob/cm_2.5/debian/release/quagga_0.99.23.1-1+cl2.5_amd64.deb?raw=true dest=/tmp/quagga_2.5.6.deb validate_certs=False
-  # delegate_to: 127.0.0.1
-
-# - name: grab quagga from mgmt server
-#   get_url: url=http://oob-mgmt-server.lab.local/quagga_2.5.6.deb dest=/root/quagga_2.5.6.deb validate_certs=False
+  get_url: url=http://repo3.cumulusnetworks.com/repo/pool/cumulus/q/quagga/quagga-dbg_0.99.23.1-1+cl3u2_amd64.deb?raw=true dest=/tmp/quagga_2.5.6.deb validate_certs=False
 
 - name: Install Quagga
   apt: deb=/tmp/quagga_2.5.6.deb
-
-#- name: print ansible_lsb.id result
-#  debug: var=ansible_lsb.id
-
-# - name: copy interfaces
-#   copy: src=scenario{{s}}/{{ansible_hostname}}/interfaces dest=/etc/network/
 
 - name: copy Quagga daemons
   copy: src=daemons dest=/etc/quagga/
@@ -76,36 +37,9 @@
     - eth1
     - eth2
 
-
 - name: Force Interfaces Up
   command: ifup {{item}}
   with_items:
     - lo
     - eth1
     - eth2
-
-# - name: Check if default for eth0 is installed
-#   shell: "ip route show"
-#   register: default_installed
-#   notify: delete default if everything else worked and we are running vagrant
-#   tags:
-#     - remove_default
-
-# - name: delete default if everything else worked and we are running vagrant
-#   command: ip route del default via 192.168.0.254
-#   when: default_installed is defined and "default via 192.168.0.254 dev eth0" in default_installed.stdout  
-#   tags:
-#     - remove_default
-
-# - name: Check if default for vagrant is installed
-#   shell: "ip route show"
-#   register: default_installed
-#   notify: delete default if everything else worked and we are running vagrant
-#   tags:
-#     - remove_default
-
-# - name: delete default if everything else worked and we are running vagrant
-#   command: ip route del default via 10.0.2.2
-#   when: default_installed is defined and "default via 10.0.2.2 dev vagrant" in default_installed.stdout  
-#   tags:
-#     - remove_default
