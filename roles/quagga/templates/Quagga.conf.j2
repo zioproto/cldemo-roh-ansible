@@ -14,14 +14,7 @@ interface {{ neighbor }}
  ipv6 nd ra-interval 3
 !
 {% endfor %}
-{% if intvars.neighbors is defined %}
-{% for int in intvars.neighbors %}
-route-map rdarp permit {{loop.index}}
-match interface {{int}}
-{% endfor %}
-!
-ip protocol table route-map rdarp
-{% endif %}
+
 router bgp {{ intvars.asn }}
     bgp router-id {{ intvars.loopback }}
     network {{ intvars.loopback }}/32
