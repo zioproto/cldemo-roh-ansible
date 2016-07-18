@@ -10,10 +10,13 @@
   apt: name=iproute update_cache=yes state=present cache_valid_time=86400
 
 - name: download official quagga deb
-  get_url: url=https://s3.amazonaws.com/cumulusfiles/roh-ubuntu1404.tar validate_certs=False dest=/tmp/quagga.deb force=no
+  get_url: url=https://s3.amazonaws.com/cumulusfiles/roh-ubuntu1404.tar validate_certs=False dest=/tmp/quagga.tar force=no
+
+- name: Untar the package
+  unarchive: src=/tmp/roh-ubuntu1404.tar dest=/tmp/ copy=no
 
 - name: Install Quagga
-  apt: deb=/tmp/quagga.deb
+  apt: deb=/tmp/quagga_0.99.23.1-1+cl3u2_trusty_amd64.deb
 
 - name: copy Quagga daemons
   copy: src=daemons dest=/etc/quagga/
