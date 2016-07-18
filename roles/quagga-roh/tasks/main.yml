@@ -1,10 +1,6 @@
-- name: Set APT to always use IPv4
-  shell: "echo 'Acquire::ForceIPv4 \"true\";' > /etc/apt/apt.conf.d/99force-ipv4"
-
-- name: Enable Routing for IPv4
-  sysctl: name="net.ipv4.ip_forward" value=1 sysctl_set=yes state=present reload=yes
-  tags:
-    - quagga
+- name: write sysctl files so quagga works correctly on hosts
+  copy: src=99cumulus_defaults dest=/etc/sysctl.d/99cumulus_defaults.conf
+  notify: reload sysctl files
 
 - name: Install iproute for Quagga dependency
   apt: name=iproute update_cache=yes state=present cache_valid_time=86400
