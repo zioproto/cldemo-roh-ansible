@@ -20,7 +20,7 @@
   roles:
     - ifupdown
     - quagga-roh
-- hosts: server04
+- hosts: server02
   user: cumulus
   become: yes
   become_method: sudo
