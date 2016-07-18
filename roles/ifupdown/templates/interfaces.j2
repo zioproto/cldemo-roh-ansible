@@ -5,6 +5,9 @@
 
 auto lo
 iface lo inet loopback
+
+auto lo
+iface lo inet static
     address {{ intvars['loopback'].ip }}
     netmask {{ intvars['loopback'].mask }}
 
