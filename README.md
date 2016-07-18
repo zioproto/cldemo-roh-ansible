@@ -29,9 +29,9 @@ Quickstart: Run the demo
     cd cldemo-roh-ansible
     ansible-playbook run-demo.yml
 
-    ### check reachability of server04 from server01
+    ### check reachability of server02 from server01
     ssh server01
-    wget 172.16.1.104
+    wget 10.0.0.32
     cat index.html
 
 
