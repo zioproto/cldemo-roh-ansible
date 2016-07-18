@@ -6,18 +6,11 @@
   tags:
     - quagga
 
-- name: Check if iproute is installed
-  shell: "dpkg-query -f '${binary:Package}\n' -W"
-  register: iproute_installed
-  notify: Install iproute for Quagga dependency
-
 - name: Install iproute for Quagga dependency
   apt: name=iproute update_cache=yes state=present cache_valid_time=86400
-  when: "'iproute' not in iproute_installed"
 
 - name: download official quagga deb
-  #get_url: url=http://repo3.cumulusnetworks.com/repo/pool/cumulus/q/quagga/quagga_0.99.23.1-1+cl3u2_amd64.deb?raw=true dest=/tmp/quagga.deb validate_certs=False
-  get_url: url=https://github.com/CumulusNetworks/quagga/blob/cm_2.5/debian/release/quagga_0.99.23.1-1+cl2.5_amd64.deb?raw=true dest=/tmp/quagga.deb validate_certs=False
+  get_url: url=https://s3.amazonaws.com/cumulusfiles/roh-ubuntu1404.tar validate_certs=False dest=/tmp/quagga.deb force=no
 
 - name: Install Quagga
   apt: deb=/tmp/quagga.deb

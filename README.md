@@ -15,7 +15,7 @@ Quickstart: Run the demo
     git clone https://github.com/cumulusnetworks/cldemo-vagrant
     cd cldemo-vagrant
     vagrant up oob-mgmt-server oob-mgmt-switch leaf01 leaf02 spine01 spine02 server01 server02
-    
+
     ### setup oob mgmt server
     vagrant ssh oob-mgmt-server
     sudo su - cumulus
@@ -24,7 +24,7 @@ Quickstart: Run the demo
     sudo apt-get update
     sudo apt-get install ansible -qy
 
-    ### Run the rdnbr demo
+    ### Run the ROH demo
     git clone https://github.com/rdarbha/cldemo-roh-ansible
     cd cldemo-roh-ansible
     ansible-playbook run-demo.yml
@@ -42,7 +42,7 @@ This demo runs on a spine-leaf topology with four dual-attached hosts. Each devi
 
 Setting up the Infrastructure
 -----------------------------
-Ansible is an extremely lightweight automation solution. Ansible does not require agents or software to be installed on the nodes to be managed, and does not run a daemon on the server. As long as key-based authentication and passwordless sudo is enabled on all of the devices for the management user, Ansible can be used for automation. Ansible playbooks can either be run manually by an admin to deploy changes as they are implemented, or they can be scheduled to automatically run via a cronjob. There is also a premium edition of Ansible available that further enables automation and administration of the network by introducing a web UI. 
+Ansible is an extremely lightweight automation solution. Ansible does not require agents or software to be installed on the nodes to be managed, and does not run a daemon on the server. As long as key-based authentication and passwordless sudo is enabled on all of the devices for the management user, Ansible can be used for automation. Ansible playbooks can either be run manually by an admin to deploy changes as they are implemented, or they can be scheduled to automatically run via a cronjob. There is also a premium edition of Ansible available that further enables automation and administration of the network by introducing a web UI.
 
 
 Anatomy of an Ansible Playbook
@@ -51,7 +51,7 @@ Anatomy of an Ansible Playbook
 The *inventory* is a list of all of the hostnames in the network, broken out into various groups. In this playbook, we have a group for spines, leafs, and servers, but you can break them out into logical groups as well, such as `database_cluster` or `datacenter2_spines`. A host can be in multiple groups. All of the servers are automatically placed into the special group `all`.
 
 ### `group_vars/`
-This folder contains variables applied across groups of servers, written in yaml format. We use variables in the `all` group to define our entire layer 3 fabric and leave it up to the templates to select the appropriate variables. In a more complicated infrastructure, we can create group-specific variable files to spread out the 
+This folder contains variables applied across groups of servers, written in yaml format. We use variables in the `all` group to define our entire layer 3 fabric and leave it up to the templates to select the appropriate variables. In a more complicated infrastructure, we can create group-specific variable files to spread out the
 
 ### `roles/`
 This contains the tasks that can be applied to host groups. Each role contains up to four folders. In this demo, we deploy the quagga and ifupdown2 roles on our switches and servers, ifupdown on both servers, and apache only on server02.
