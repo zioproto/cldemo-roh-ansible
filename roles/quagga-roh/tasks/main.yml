@@ -16,12 +16,14 @@
 
 - name: copy Quagga daemons
   copy: src=daemons dest=/etc/quagga/
+  notify: restart quagga
 
 - name: copy Quagga conf
   template: src=Quagga.conf.j2 dest=/etc/quagga/Quagga.conf
+  notify: restart quagga
 
-- name: reload quagga
-  service: name=quagga state=restarted
+- name: start quagga
+  service: name=quagga state=started
 
 - name: Force Interfaces Down
   command: ifdown {{item}}
