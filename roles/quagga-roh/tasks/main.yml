@@ -12,7 +12,7 @@
   unarchive: src=/tmp/quagga.tar dest=/tmp/ copy=no
 
 - name: Install Quagga
-  apt: deb=/tmp/ubuntu1604/quagga_0.99.23.1-1+cl3u2_trusty_amd64.deb
+  apt: deb=/tmp/ubuntu1604/quagga_0.99.23.1-1+cl3u2_xenial_amd64.deb
 
 - name: copy Quagga daemons
   copy: src=daemons dest=/etc/quagga/
