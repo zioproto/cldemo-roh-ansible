@@ -17,11 +17,6 @@ Before running this demo, install [VirtualBox](https://www.virtualbox.org/wiki/D
 
     ### setup oob mgmt server
     vagrant ssh oob-mgmt-server
-    sudo su - cumulus
-    sudo apt-get install software-properties-common -y
-    sudo apt-add-repository ppa:ansible/ansible -y
-    sudo apt-get update
-    sudo apt-get install ansible -qy
 
     ### Run the ROH demo
     git clone https://github.com/cumulusnetworks/cldemo-roh-ansible
