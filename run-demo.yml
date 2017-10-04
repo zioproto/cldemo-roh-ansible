@@ -3,17 +3,17 @@
   become: yes
   roles:
     - ifupdown2
-    - quagga
+    - frr
 
 - hosts: spines
   become: yes
   roles:
     - ifupdown2
-    - quagga
+    - frr
 
 - hosts: servers
   become: yes
   roles:
     - ifupdown
-    - quagga-roh
+    - frr-roh
 
