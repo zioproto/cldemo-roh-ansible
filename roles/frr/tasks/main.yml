@@ -1,23 +1,27 @@
 
-# This step ensures that the quagga daemon is running.
-- name: ensure quagga is running
-  service: name=quagga state=started
+# This step ensures that the frr daemon is running.
+- name: ensure frr is running
+  service: 
+    name: frr
+    state: started
 
-# The quagga daemons file is a static file that specifies which subdaemons
-# are actually running (zebra, bgpd, ospf). This file is not required when
-# Quagga is being run using systemd.
-- name: configure quagga daemons file
-  copy: src=daemons dest=/etc/quagga/daemons
+# The frr daemons file is a static file that specifies which subdaemons
+# are actually running (zebra, bgpd, ospf).
+- name: configure frr daemons file
+  copy: 
+    src: daemons 
+    dest: /etc/frr/daemons
   notify:
-    - check quagga
-    - restart quagga
+    - restart frr
 
-# This writes configuration to the Quagga configuration file using the
+# This writes configuration to the frr configuration file using the
 # information in group_vars/all. The biggest difference between spine and
 # leaf configuration are the prefix lists - leafs should only advertise their
 # neighboring networks, but spines should advertise any networks they accept.
-- name: configure quagga configuration
-  template: src=Quagga.conf.j2 dest=/etc/quagga/Quagga.conf
+- name: configure frr configuration
+  template: 
+    src: frr.conf.j2 
+    dest: /etc/frr/frr.conf
+  validate: vtysh -C -f %s
   notify:
-    - check quagga
-    - restart quagga
+    - restart frr
