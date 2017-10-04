@@ -1,29 +1,44 @@
-- name: write sysctl files so quagga works correctly on hosts
-  copy: src=99cumulus_defaults dest=/etc/sysctl.d/99cumulus_defaults.conf
+- name: Install FRR dependencies
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - libc-ares2
+    - iproute
+
+- name: Update Sysctl settings for a host that will be doing routing
+  copy: 
+    src: 99cumulus_defaults 
+    dest: /etc/sysctl.d/99cumulus_defaults.conf
   notify: reload sysctl files
 
-- name: Install iproute for Quagga dependency
-  apt: name=iproute update_cache=yes state=present cache_valid_time=86400
-
-- name: download official quagga deb
-  get_url: url=http://cumulusfiles.s3.amazonaws.com/roh-3.3.0-ubuntu1604.tar validate_certs=False dest=/tmp/quagga.tar force=no
-
-- name: Untar the package
-  unarchive: src=/tmp/quagga.tar dest=/tmp/ copy=no
+- name: download official frr deb
+  get_url: 
+    url: https://apps3.cumulusnetworks.com/repos/deb/pool/roh-3/f/frr/frr_3.1+cl3u2-1~ubuntu16.04+1~1506550809.d4b6eca_amd64.deb
+    dest: /home/cumulus/frr.deb
 
 - name: Install Quagga
-  apt: deb=/tmp/ubuntu1604/quagga_0.99.23.1-1+cl3u2_xenial_amd64.deb
+  apt: 
+    deb: /home/cumulus/frr.deb
 
-- name: copy Quagga daemons
-  copy: src=daemons dest=/etc/quagga/
-  notify: restart quagga
+- name: copy frr daemons
+  copy: 
+    src: daemons 
+    dest: /etc/frr/daemons
+  notify: restart frr
 
-- name: copy Quagga conf
-  template: src=Quagga.conf.j2 dest=/etc/quagga/Quagga.conf
-  notify: restart quagga
+- name: copy frr conf
+  template: 
+    src: frr.conf.j2 
+    dest: /etc/frr/frr.conf
+    validate: vtysh -C -f %s
+  notify:
+    - restart frr
 
 - name: start quagga
-  service: name=quagga state=started
+  service: 
+    name: frr 
+    state: started
 
 - name: Force Interfaces Down
   command: ifdown {{item}}
