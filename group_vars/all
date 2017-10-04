@@ -53,33 +53,25 @@ interfaces:
             swp3:
             swp4:
     server01:
-        loopback:
-            ip: "10.0.0.31"
-            mask: "255.255.255.255"
+        loopback: "10.0.0.31"
         asn: 65101
         neighbors:
             eth1:
             eth2:
     server02:
-        loopback:
-            ip: "10.0.0.32"
-            mask: "255.255.255.255"
+        loopback: "10.0.0.32"
         asn: 65102
         neighbors:
             eth1:
             eth2:
     server03:
-        loopback:
-            ip: "10.0.0.33"
-            mask: "255.255.255.255"
+        loopback: "10.0.0.33"
         asn: 65103
         neighbors:
             eth1:
             eth2:
     server04:
-        loopback:
-            ip: "10.0.0.34"
-            mask: "255.255.255.255"
+        loopback: "10.0.0.34"
         asn: 65104
         neighbors:
             eth1:

@@ -8,8 +8,8 @@ iface lo inet loopback
 
 auto lo
 iface lo inet static
-    address {{ intvars['loopback'].ip }}
-    netmask {{ intvars['loopback'].mask }}
+    address {{ intvars.loopback }}
+    netmask 255.255.255.255
 
 auto eth0
 iface eth0 inet dhcp
