@@ -21,7 +21,7 @@ Prerequisites
 * Install [Virtualbox](https://www.virtualbox.org/wiki/VirtualBox) or [Libvirt+KVM](https://libvirt.org/drvqemu.html) hypervisors.
 
 
-Running the Demo
+Demo Quickstart
 ------------------------
 * `git clone https://github.com/CumulusNetworks/cldemo-vagrant`
 * `cd cldemo-vagrant`
@@ -30,6 +30,7 @@ Running the Demo
 * `vagrant ssh oob-mgmt-server`
 * `git clone https://github.com/CumulusNetworks/cldemo-roh-ansible`
 * `ansible-playbook run-demo.yml`
+
 
 Demo Details
 ------------------------
@@ -41,3 +42,5 @@ The servers are configured with eBGP unnumbered to their top of rack switch pair
 All network devices are also configured with eBGP unnumbered. 
 
 All devices have a /32 loopback IP address that is advertised via BGP. 
+
+The exit, edge and internet devices are not used in this demo.
