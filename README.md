@@ -1,29 +1,43 @@
-Routing On the Host (RoH) Demo
-===========================
+# Cumulus Routing on the Host Demo
 
-This demo shows a topology using 'Routing on the Host' to add host reachability directly into a BGP routed fabric. Switches are Cumulus Linux and servers running Ubuntu. This playbook configures a CLOS topology running BGP unnumbered in the fabric with numbered links towards the hosts, and installs a webserver on one of the hosts to serve as a Hello World example. The Ubunut server acts as the host to redistribute kernel routes as /32 host routes into the routing table when VMs or containers become available. When the demo runs successfully, any server on the network should be able to access the webserver via the BGP routes established over the fabric.
-
-This demo is written for the [cldemo-vagrant](https://github.com/cumulusnetworks/cldemo-vagrant) reference topology and applies the reference BGP unnumbered configuration from [cldemo-config-routing](https://github.com/cumulusnetworks/cldemo-config-routing).
+This demo installs Cumulus Linux [Hostpack](https://cumulusnetworks.com/products/host-pack/) on Ubuntu 16.04 servers in the Cumulus [reference topology](https://github.com/cumulusnetworks/cldemo-vagrant). Please visit the reference topology github page for detailed instructions on using Cumulus Vx with Vagrant.
 
 
-Quickstart: Run the demo
+![Cumulus Reference Topology](https://raw.githubusercontent.com/CumulusNetworks/cldemo-vagrant/master/documentation/cldemo_topology.png)
+
+
+Table of Contents
+=================
+* [Prerequisites](#prerequisites)
+* [Demo Quickstart](#demo-quickstart)
+* [Demo Details](#demo-details)
+
+
+Prerequisites
 ------------------------
-Before running this demo, install [VirtualBox](https://www.virtualbox.org/wiki/Download_Old_Builds) and [Vagrant](https://releases.hashicorp.com/vagrant/). The currently supported versions of VirtualBox and Vagrant can be found on the [cldemo-vagrant](https://github.com/cumulusnetworks/cldemo-vagrant).
+* Internet connectivity is required from the hypervisor. Multiple packages are installed on the servers when the lab is created.
+* Download this repository locally with `git clone https://github.com/CumulusNetworks/cldemo-roh-ansible.git` or if you do not have Git installed, [Download the zip file](https://github.com/CumulusNetworks/cldemo-roh-ansible/archive/master.zip)
+* Install [Vagrant](https://releases.hashicorp.com/vagrant/). Use release [1.9.5](https://releases.hashicorp.com/vagrant/1.9.5/).
+* Install [Virtualbox](https://www.virtualbox.org/wiki/VirtualBox) or [Libvirt+KVM](https://libvirt.org/drvqemu.html) hypervisors.
 
-    ### Bring up the vagrant topology
-    git clone https://github.com/cumulusnetworks/cldemo-vagrant
-    cd cldemo-vagrant
-    vagrant up oob-mgmt-server oob-mgmt-switch leaf01 leaf02 spine01 spine02 server01 server02
 
-    ### setup oob mgmt server
-    vagrant ssh oob-mgmt-server
+Running the Demo
+------------------------
+* `git clone https://github.com/CumulusNetworks/cldemo-vagrant`
+* `cd cldemo-vagrant`
+* `vagrant up oob-mgmt-server oob-mgmt-switch`
+* `vagrant up` (bringing up the oob-mgmt-server and switch first prevent DHCP issues)
+* `vagrant ssh oob-mgmt-server`
+* `git clone https://github.com/CumulusNetworks/cldemo-roh-ansible`
+* `ansible-playbook run-demo.yml`
 
-    ### Run the ROH demo
-    git clone https://github.com/cumulusnetworks/cldemo-roh-ansible
-    cd cldemo-roh-ansible
-    ansible-playbook run-demo.yml
+Demo Details
+------------------------
+The network consists of 2 spines, 4 leafs and 4 Ubuntu 16.04 servers.  
+All four of the servers have the Cumulus Linux FRR package for Routing on the Host installed on them. 
 
-    ### check reachability of server02 from server01
-    ssh server01
-    wget 10.0.0.32
-    cat index.html
+The servers are configured with eBGP unnumbered to their top of rack switch pair. There are no bonds in the environment. 
+
+All network devices are also configured with eBGP unnumbered. 
+
+All devices have a /32 loopback IP address that is advertised via BGP. 
