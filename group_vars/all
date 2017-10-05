@@ -3,7 +3,7 @@ interfaces:
     leaf01:
         loopback: "10.0.0.11"
         asn: 65011
-        neighbors:
+        servers:
             swp1:
             swp2:
         fabric:
@@ -12,7 +12,7 @@ interfaces:
     leaf02:
         loopback: "10.0.0.12"
         asn: 65012
-        neighbors:
+        servers:
             swp1:
             swp2:
         fabric:
@@ -21,7 +21,7 @@ interfaces:
     leaf03:
         loopback: "10.0.0.13"
         asn: 65013
-        neighbors:
+        servers:
             swp1:
             swp2:
         fabric:
@@ -30,7 +30,7 @@ interfaces:
     leaf04:
         loopback: "10.0.0.14"
         asn: 65014
-        neighbors:
+        servers:
             swp1:
             swp2:
         fabric:
