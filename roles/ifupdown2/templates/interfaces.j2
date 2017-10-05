@@ -9,16 +9,17 @@ iface lo inet loopback
 auto eth0
 iface eth0 inet dhcp
 
-{% if intvars.neighbors is defined %}
-{% for iface in intvars.neighbors %}
-auto {{ iface }}
-iface {{ iface }}
+{% if intvars.servers is defined %}
+{% for interface in intvars.servers %}
+auto {{ interface }}
+iface {{ interface }}
 
 {% endfor %}
 {% endif %}
 
-{% for iface in intvars.fabric %}
-auto {{ iface }}
-iface {{ iface }}
-
+{% if intvars.fabric is defined %}
+{% for interface in intvars.fabric %}
+auto {{ interface }}
+iface {{ interface }}
 {% endfor %}
+{% endif %}
