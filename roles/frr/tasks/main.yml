@@ -24,4 +24,4 @@
     dest: /etc/frr/frr.conf
     validate: vtysh -C -f %s
   notify:
-    - restart frr
+    - reload frr
