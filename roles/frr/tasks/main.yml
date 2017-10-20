@@ -1,3 +1,6 @@
+# This step ensures that the frr daemin is installed.
+- name: install frr
+  apt: name=frr state=present
 
 # This step ensures that the frr daemon is running.
 - name: ensure frr is running
