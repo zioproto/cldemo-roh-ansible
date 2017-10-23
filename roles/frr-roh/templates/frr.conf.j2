@@ -41,10 +41,12 @@ router bgp {{ intvars.asn }}
  !
  address-family ipv4 unicast
   network {{ intvars.loopback }}/32
+  {% if intvars.neighbors is defined %}
   {% for neighbor in intvars.neighbors %}
   neighbor {{ neighbor }} soft-reconfiguration inbound
   neighbor fabric prefix-list LOOPBACK out
   {% endfor %}
+  {% endif %}
  exit-address-family
 !
 ip prefix-list LOOPBACK seq 5 permit {{ intvars.loopback }}/32
