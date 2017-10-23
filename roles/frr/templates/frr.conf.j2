@@ -46,8 +46,15 @@ router bgp {{ intvars.asn }}
  !
  address-family ipv4 unicast
   network {{ intvars.loopback }}/32
-  {% for neighbor in intvars.neighbors %}
+  {% if intvars.servers is defined %}
+  {% for neighbor in intvars.servers %}
   neighbor {{ neighbor }} soft-reconfiguration inbound
   {% endfor %}
+  {% endif %}
+  {% if intvars.fabric is defined %}
+  {% for neighbor in intvars.fabric %}
+  neighbor {{ neighbor }} soft-reconfiguration inbound
+  {% endfor %}
+  {% endif %}
  exit-address-family
 !
