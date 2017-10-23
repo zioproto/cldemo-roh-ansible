@@ -32,6 +32,10 @@ router bgp {{ intvars.asn }}
   network {{ intvars.loopback }}/32
   {% for neighbor in intvars.neighbors %}
   neighbor {{ neighbor }} soft-reconfiguration inbound
+  neighbor fabric prefix-list LOOPBACK out
   {% endfor %}
  exit-address-family
+!
+ip prefix-list LOOPBACK seq 5 permit {{ intvars.loopback }}/32
+ip prefix-list LOOPBACK seq 10 deny 0.0.0.0/0
 !
