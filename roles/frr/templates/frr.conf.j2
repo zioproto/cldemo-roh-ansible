@@ -50,6 +50,7 @@ router ospf6
   interface {{ neighbor }} area 0.0.0.0
 {% endfor %}
 {% endif %}
+{% endif %}
 !
 router bgp {{ intvars.asn }}
  bgp router-id {{ intvars.loopback }}
