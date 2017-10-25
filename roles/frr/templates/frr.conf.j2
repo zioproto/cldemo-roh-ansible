@@ -45,8 +45,12 @@ router ospf6
  router-id {{ intvars.loopback }}
  redistribute connected
  redistribute static
-{% if intvars.neighbors is defined %}
-{% for neighbor in intvars.neighbors %}
+{% if intvars.fabric is defined %}
+{% for neighbor in intvars.fabric %}
+  interface {{ neighbor }} area 0.0.0.0
+{% endfor %}
+{% if intvars.servers is defined %}
+{% for neighbor in intvars.servers %}
   interface {{ neighbor }} area 0.0.0.0
 {% endfor %}
 {% endif %}
