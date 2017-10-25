@@ -16,10 +16,12 @@ iface eth0 inet dhcp
 
 {% for iface in neighborvars %}
 auto {{ iface }}
-iface {{ iface }} inet manual
-    alias desc
+iface {{ iface }} manual
+    mtu 1500
+iface {{ iface }} inet static
     address {{ intvars.loopback }}
     netmask 255.255.255.255
+iface {{ iface }} inet6 static
     address {{ intvars.loopbackv6 }}
     netmask 128
 {% endfor %}
