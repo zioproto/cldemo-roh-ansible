@@ -2,6 +2,8 @@
 interfaces:
     leaf01:
         loopback: "10.0.0.11"
+        loopbackv6: "fec0::11"
+        ospf: "yes"
         asn: 65011
         servers:
             swp1:
@@ -11,6 +13,8 @@ interfaces:
             swp52:
     leaf02:
         loopback: "10.0.0.12"
+        loopbackv6: "fec0::12"
+        ospf: "yes"
         asn: 65012
         servers:
             swp1:
@@ -20,6 +24,8 @@ interfaces:
             swp52:
     leaf03:
         loopback: "10.0.0.13"
+        loopbackv6: "fec0::13"
+        ospf: "yes"
         asn: 65013
         servers:
             swp1:
@@ -29,6 +35,8 @@ interfaces:
             swp52:
     leaf04:
         loopback: "10.0.0.14"
+        loopbackv6: "fec0::14"
+        ospf: "yes"
         asn: 65014
         servers:
             swp1:
@@ -38,6 +46,8 @@ interfaces:
             swp52:
     spine01:
         loopback: "10.0.0.21"
+        loopbackv6: "fec0::21"
+        ospf: "yes"
         asn: 65020
         fabric:
             swp1:
@@ -46,6 +56,8 @@ interfaces:
             swp4:
     spine02:
         loopback: "10.0.0.22"
+        loopbackv6: "fec0::22"
+        ospf: "yes"
         asn: 65020
         fabric:
             swp1:
@@ -54,24 +66,32 @@ interfaces:
             swp4:
     server01:
         loopback: "10.0.0.31"
+        loopbackv6: "fec0::31"
+        ospf: "yes"
         asn: 65101
         neighbors:
             eth1:
             eth2:
     server02:
         loopback: "10.0.0.32"
+        loopbackv6: "fec0::32"
+        ospf: "yes"
         asn: 65102
         neighbors:
             eth1:
             eth2:
     server03:
         loopback: "10.0.0.33"
+        loopbackv6: "fec0::33"
+        ospf: "yes"
         asn: 65103
         neighbors:
             eth1:
             eth2:
     server04:
         loopback: "10.0.0.34"
+        loopbackv6: "fec0::34"
+        ospf: "yes"
         asn: 65104
         neighbors:
             eth1:

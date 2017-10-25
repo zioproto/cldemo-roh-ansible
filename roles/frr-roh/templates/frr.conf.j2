@@ -14,6 +14,7 @@ interface {{ neighbor }}
  ipv6 nd ra-interval 3
  {% if intvars.ospf is defined %}
  ip ospf network point-to-point
+ ipv6 ospf6 network point-to-point
  {% endif %}
 !
 {% endfor %}
@@ -25,6 +26,15 @@ router ospf
  redistribute connected
  redistribute static
  network {{ intvars.loopback }}/32 area 0.0.0.0
+!
+router ospf6
+ router-id {{ intvars.loopback }}
+ redistribute connected
+ redistribute static
+{% if intvars.neighbors is defined %}
+{% for neighbor in intvars.neighbors %}
+  interface {{ neighbor }} area 0.0.0.0
+{% endfor %}
 {% endif %}
 !
 router bgp {{ intvars.asn }}
