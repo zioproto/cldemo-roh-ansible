@@ -49,6 +49,7 @@ router ospf6
 {% for neighbor in intvars.fabric %}
   interface {{ neighbor }} area 0.0.0.0
 {% endfor %}
+{% endif %}
 {% if intvars.servers is defined %}
 {% for neighbor in intvars.servers %}
   interface {{ neighbor }} area 0.0.0.0
