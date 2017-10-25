@@ -13,6 +13,11 @@ iface eth0 inet dhcp
 {% for interface in intvars.servers %}
 auto {{ interface }}
 iface {{ interface }}
+    alias desc
+    address {{ intvars.loopback }}
+    netmask 255.255.255.255
+    address {{ intvars.loopbackv6 }}
+    netmask 128
 
 {% endfor %}
 {% endif %}
@@ -21,6 +26,11 @@ iface {{ interface }}
 {% for interface in intvars.fabric %}
 auto {{ interface }}
 iface {{ interface }}
+    alias desc
+    address {{ intvars.loopback }}
+    netmask 255.255.255.255
+    address {{ intvars.loopbackv6 }}
+    netmask 128
 
 {% endfor %}
 {% endif %}
