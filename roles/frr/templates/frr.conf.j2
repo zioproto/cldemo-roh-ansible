@@ -90,3 +90,17 @@ router bgp {{ intvars.asn }}
   {% endif %}
  exit-address-family
 !
+ address-family ipv6 unicast
+  network {{ intvars.loopbackv6 }}/128
+  {% if intvars.servers is defined %}
+  {% for neighbor in intvars.servers %}
+  neighbor {{ neighbor }} soft-reconfiguration inbound
+  {% endfor %}
+  {% endif %}
+  {% if intvars.fabric is defined %}
+  {% for neighbor in intvars.fabric %}
+  neighbor {{ neighbor }} soft-reconfiguration inbound
+  {% endfor %}
+  {% endif %}
+ exit-address-family
+!
