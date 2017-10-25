@@ -16,7 +16,7 @@ iface eth0 inet dhcp
 
 {% for iface in neighborvars %}
 auto {{ iface }}
-iface {{ iface }} manual
+iface {{ iface }} inet manual
     mtu 1500
 iface {{ iface }} inet static
     address {{ intvars.loopback }}
