@@ -52,22 +52,15 @@ router bgp {{ intvars.asn }}
  !
  address-family ipv4 unicast
   network {{ intvars.loopback }}/32
-  {% if intvars.neighbors is defined %}
-  {% for neighbor in intvars.neighbors %}
-  neighbor {{ neighbor }} soft-reconfiguration inbound
+  neighbor fabric soft-reconfiguration inbound
   neighbor fabric prefix-list LOOPBACK out
-  {% endfor %}
-  {% endif %}
  exit-address-family
 !
  address-family ipv6 unicast
   network {{ intvars.loopbackv6 }}/128
-  {% if intvars.neighbors is defined %}
-  {% for neighbor in intvars.neighbors %}
-  neighbor {{ neighbor }} soft-reconfiguration inbound
+  neighbor fabric activate
+  neighbor fabric soft-reconfiguration inbound
   neighbor fabric prefix-list LOOPBACKV6 out
-  {% endfor %}
-  {% endif %}
  exit-address-family
 !
 ip prefix-list LOOPBACK seq 5 permit {{ intvars.loopback }}/32
