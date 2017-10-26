@@ -54,6 +54,7 @@ router bgp {{ intvars.asn }}
   network {{ intvars.loopback }}/32
   neighbor fabric soft-reconfiguration inbound
   neighbor fabric prefix-list LOOPBACK out
+  neighbor fabric prefix-list DEFAULT-PERMIT in
  exit-address-family
 !
  address-family ipv6 unicast
@@ -61,6 +62,7 @@ router bgp {{ intvars.asn }}
   neighbor fabric activate
   neighbor fabric soft-reconfiguration inbound
   neighbor fabric prefix-list LOOPBACKV6 out
+  neighbor fabric prefix-list DEFAULTV6-PERMIT in
  exit-address-family
 !
 ip prefix-list LOOPBACK seq 5 permit {{ intvars.loopback }}/32
@@ -68,3 +70,6 @@ ip prefix-list LOOPBACK seq 10 deny 0.0.0.0/0
 !
 ip prefix-list LOOPBACKV6 seq 5 permit {{ intvars.loopbackv6 }}/128
 ip prefix-list LOOPBACKV6 seq 10 deny ::/0
+!
+ip prefix-list DEFAULT-PERMIT seq 5 permit 0.0.0.0/0
+ip prefix-list DEFAULTV6-PERMIT seq 5 permit ::/0
