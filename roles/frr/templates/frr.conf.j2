@@ -78,8 +78,8 @@ router bgp {{ intvars.asn }}
  !
  address-family ipv4 unicast
   network {{ intvars.loopback }}/32
+  network 0.0.0.0/0
   neighbor servers soft-reconfiguration inbound
-  neighbor servers default-originate
   neighbor servers prefix-list DEFAULT-PERMIT out
   neighbor fabric  soft-reconfiguration inbound
  exit-address-family
