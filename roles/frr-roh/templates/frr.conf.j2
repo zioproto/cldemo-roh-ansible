@@ -9,7 +9,7 @@ log syslog
 !
 {% if intvars.neighbors is defined %}
 {% for neighbor in intvars.neighbors %}
-interface {{ neighbor }}
+interface {{ neighbor }}.{{ accessvlan }}
  no ipv6 nd suppress-ra
  ipv6 nd ra-interval 3
  {% if intvars.ospf is defined %}
@@ -33,7 +33,7 @@ router ospf6
  redistribute static
 {% if intvars.neighbors is defined %}
 {% for neighbor in intvars.neighbors %}
-  interface {{ neighbor }} area 0.0.0.0
+  interface {{ neighbor }}.{{ accessvlan }} area 0.0.0.0
 {% endfor %}
 {% endif %}
 {% endif %}
@@ -46,7 +46,7 @@ router bgp {{ intvars.asn }}
  neighbor fabric remote-as external
  {% if intvars.neighbors is defined %}
     {% for neighbor in intvars.neighbors %}
-    neighbor {{ neighbor }} interface peer-group fabric
+    neighbor {{ neighbor }}.{{ accessvlan }} interface peer-group fabric
     {% endfor %}
  {% endif %}
  !

@@ -1,4 +1,6 @@
 # networking
+mtu: 1500
+accessvlan: 3
 interfaces:
     leaf01:
         loopback: "10.0.0.11"
