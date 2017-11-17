@@ -17,7 +17,9 @@ iface {{ interface }}
 
 auto {{ interface }}.{{ accessvlan }}
 iface {{ interface }}.{{ accessvlan }}
-    alias desc
+{% if interfaces[ansible_hostname].servers[interface].desc is defined %}
+    alias {{ interfaces[ansible_hostname].servers[interface].desc }}
+{% endif %}
     address {{ intvars.loopback }}
     netmask 255.255.255.255
     address {{ intvars.loopbackv6 }}
@@ -30,7 +32,9 @@ iface {{ interface }}.{{ accessvlan }}
 {% for interface in intvars.fabric %}
 auto {{ interface }}
 iface {{ interface }}
-    alias desc
+{% if interfaces[ansible_hostname].fabric[interface].desc is defined %}
+    alias {{ interfaces[ansible_hostname].fabric[interface].desc }}
+{% endif %}
     address {{ intvars.loopback }}
     netmask 255.255.255.255
     address {{ intvars.loopbackv6 }}
