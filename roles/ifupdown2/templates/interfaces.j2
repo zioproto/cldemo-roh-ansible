@@ -7,7 +7,13 @@ iface lo inet loopback
   address {{ intvars.loopback }}/32
 
 auto eth0
-iface eth0 inet dhcp
+iface eth0
+    address {{ intvars.mgmtipv4 }}
+    netmask 255.255.255.0
+    address {{ intvars.mgmtipv6 }}
+    post-up sysctl -w net.ipv6.conf.$IFACE.accept_ra=0
+    up ip addr change {{intvars.mgmtipv6 }} dev $IFACE preferred_lft 0
+    netmask 64
 
 {% if intvars.servers is defined %}
 {% for interface in intvars.servers %}
