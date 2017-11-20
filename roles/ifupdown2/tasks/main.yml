@@ -6,3 +6,9 @@
     src: interfaces.j2 
     dest: /etc/network/interfaces
   notify: reload networking
+
+- name: configure /etc/cumulus/ports.conf
+  template:
+    src: ports.conf.j2
+    dest: /etc/cumulus/ports.conf
+  notify: reload networking

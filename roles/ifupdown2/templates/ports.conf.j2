@@ -1,0 +1,9 @@
+{% set intvars = interfaces[ansible_hostname] %}
+
+{{ intvars.servers | print_portconf() }}
+{{ intvars.fabric | print_portconf() }}
+
+1=4x10G
+2=4x10G
+3=4x10G
+4=40G
